@@ -1,0 +1,424 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+	<title>教学综合信息服务平台</title>
+	
+
+
+
+
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="Copyright" content="zfsoft" />	
+<link rel="icon" href="/logo/favicon.ico" type="image/x-icon" />
+<link rel="shortcut icon" href="/logo/favicon.ico" type="image/x-icon" />
+<style type="text/css">	
+	.active{font-weight: bolder;}
+	#navbar-tabs li{ margin-top: 2px;}
+	#navbar-tabs li a{ border-top: 2px solid transparent;}
+	#navbar-tabs li.active a{border-top: 2px solid #0770cd;}
+</style>	
+<!--jQuery核心框架库 -->
+<script type="text/javascript" src="http://10.50.17.187:80/zftal-ui-v5-1.0.2/assets/js/other_jquery/jquery-1.12.4.min.js?ver=20180813"></script>
+<script type="text/javascript" src="http://10.50.17.187:80/zftal-ui-v5-1.0.2/assets/js/jquery-migrate-1.4.1.min.js?ver=20180813"></script>
+<!--jQuery浏览器检测 -->
+<script type="text/javascript" src="/js/browse/browse-judge.js?ver=20180813"></script>
+<script type="text/javascript">
+	//浏览器版本验证
+	var broswer = broswer();
+	if(broswer.msie==true||broswer.safari==true||broswer.mozilla==true||broswer.chrome==true){
+		if(broswer.msie==true&&broswer.version<9){
+		   window.location.href = _path+"/xtgl/init_cxBrowser.html";
+		}
+	}else{
+		 window.location.href = _path+"/xtgl/init_cxBrowser.html";
+	}
+</script>
+<script type="text/javascript">
+var _path 				= "";
+var _systemPath 		= "";
+var _stylePath 			= "http://10.50.17.187:80/zftal-ui-v5-1.0.2";
+var _reportPath 		= "http://10.71.33.183:8080/WebReport";
+var _refreshInterval	= "10";
+var _localeKey 			= "zh_CN";
+</script>
+<!--
+jquery.ui 需要在bootstrap之前加载，解决冲突问题
+http://blog.csdn.net/remote_roamer/article/details/14105999
+-->
+<script type="text/javascript" src="http://10.50.17.187:80/zftal-ui-v5-1.0.2/assets/js/jquery-ui-custom.contact-1.0.0.js?ver=20180813"></script>
+<!--Bootstrap布局框架-->
+<link rel="stylesheet" type="text/css" href="http://10.50.17.187:80/zftal-ui-v5-1.0.2/assets/plugins/bootstrap/css/bootstrap.min.css?ver=20180813" />
+<link rel="stylesheet" type="text/css" href="http://10.50.17.187:80/zftal-ui-v5-1.0.2/assets/css/error.css?ver=20180813" />
+<link rel="stylesheet" type="text/css" href="http://10.50.17.187:80/zftal-ui-v5-1.0.2/assets/css/zftal-ui.css?ver=20180813" />
+<script type="text/javascript" src="http://10.50.17.187:80/zftal-ui-v5-1.0.2/assets/plugins/bootstrap/js/bootstrap.min.js?ver=20180813" charset="utf-8"></script>
+<!--jQuery常用工具扩展库：基础工具,资源加载工具,元素尺寸相关工具 -->
+<script type="text/javascript" src="http://10.50.17.187:80/zftal-ui-v5-1.0.2/assets/js/zftal/jquery.utils.contact-min.js?ver=20180813" charset="utf-8"></script>
+<!--jQuery基础工具库：$.browser,$.cookie,$.actual等 -->
+<script type="text/javascript" src="http://10.50.17.187:80/zftal-ui-v5-1.0.2/assets/js/zftal/jquery.plugins.contact-min.js?ver=20180813" charset="utf-8"></script>
+<!--jQuery自定义event事件库 -->
+<script type="text/javascript" src="http://10.50.17.187:80/zftal-ui-v5-1.0.2/assets/js/zftal/jquery.events.contact-min.js?ver=20180813" charset="utf-8"></script>
+<!--JavaScript对象扩展库：Array,Date,Number,String -->
+<script type="text/javascript" src="http://10.50.17.187:80/zftal-ui-v5-1.0.2/assets/js/zftal/jquery.extends.contact-min.js?ver=20180813" charset="utf-8"></script>
+<!--Bootbox弹窗插件-->
+<link rel="stylesheet" type="text/css" href="http://10.50.17.187:80/zftal-ui-v5-1.0.2/assets/plugins/bootbox/css/bootbox.css?ver=20180813" />
+<script src="http://10.50.17.187:80/zftal-ui-v5-1.0.2/assets/plugins/bootbox/bootbox.concat-min.js?ver=20180813" type="text/javascript" charset="utf-8"></script>
+<script src="http://10.50.17.187:80/zftal-ui-v5-1.0.2/assets/plugins/bootbox/lang/zh_CN.js?ver=20180813" type="text/javascript" charset="utf-8"></script>
+
+<!--jQuery模拟滚动条库-->
+<link rel="stylesheet" type="text/css" href="http://10.50.17.187:80/zftal-ui-v5-1.0.2/assets/plugins/customscrollbar/css/jquery.mCustomScrollbar.min.css?ver=20180813" />
+<script type="text/javascript" src="http://10.50.17.187:80/zftal-ui-v5-1.0.2/assets/plugins/customscrollbar/js/jquery.mCustomScrollbar.min.js?ver=20180813" charset="utf-8"></script>
+<!--jQuery.chosen美化插件-->
+<link rel="stylesheet" type="text/css" href="http://10.50.17.187:80/zftal-ui-v5-1.0.2/assets/plugins/chosen/css/chosen-min.css?ver=20180813" />
+<script type="text/javascript" src="http://10.50.17.187:80/zftal-ui-v5-1.0.2/assets/plugins/chosen/jquery.choosen.concat-min.js?ver=20180813" charset="utf-8"></script>
+<script type="text/javascript" src="http://10.50.17.187:80/zftal-ui-v5-1.0.2/assets/plugins/chosen/lang/zh_CN-min.js?ver=20180813" charset="utf-8"></script>
+<script type="text/javascript" src="http://10.50.17.187:80/zftal-ui-v5-1.0.2/assets/js/utils/jquery.utils.pinyin.min.js?ver=20180813" charset="utf-8"></script>
+<!--[if lt IE 9]>
+<script type="text/javascript" src="http://10.50.17.187:80/zftal-ui-v5-1.0.2/assets/js/html5shiv.min.js?ver=20180813" charset="utf-8"></script>
+<script type="text/javascript" src="http://10.50.17.187:80/zftal-ui-v5-1.0.2/assets/js/respond.min.js?ver=20180813" charset="utf-8"></script>
+<![endif]-->
+<!--业务框架jQuery全局设置和通用函数库-->
+<script type="text/javascript" src="/js/jquery.zftal.contact-min.js?ver=20180813"></script>
+<!--国际化js库 -->
+<script type="text/javascript" src="http://10.50.17.187:80/zftal-ui-v5-1.0.2/assets/plugins/i18n/jquery.i18n-min.js?ver=20180813" charset="utf-8"></script>
+<!--全局国际化js. -->
+<script type="text/javascript" src="/js/globalweb/i18n-global_zh_CN.js?ver=20180813" charset="utf-8"></script>
+<!--业务框架前端脚本国际化库-->
+<script type="text/javascript" src="http://10.50.17.187:80/zftal-ui-v5-1.0.2/assets/js/zftal/lang/jquery.zftal_zh_CN-min.js?ver=20180813"></script>
+<!--密码强弱判断-->
+<script type="text/javascript" src="http://10.50.17.187:80/zftal-ui-v5-1.0.2/assets/js/utils/jquery.utils.strength.min.js?ver=20180813"></script>
+
+	
+	
+
+
+
+
+	<!--jQuery³£ÓÃ¹¤¾ßÀ©Õ¹¿â£º»ù´¡¹¤¾ß,×ÊÔ´¼ÓÔØ¹¤¾ß,ÔªËØ³ß´çÏà¹Ø¹¤¾ß -->
+<script type="text/javascript" src="http://10.50.17.187:80/zftal-ui-v5-1.0.2/assets/js/zftal/jquery.utils.contact-min.js?ver=20180813" charset="utf-8"></script>
+<!--jQueryä¯ÀÀÆ÷¼ì²â -->
+<script type="text/javascript" src="/js/browse/browse-judge.js?ver=20180813"></script>
+<script type="text/javascript">
+	//\u6d4f\u89c8\u5668\u7248\u672c\u9a8c\u8bc1
+	var broswer = broswer();
+	if(broswer.msie==true||broswer.safari==true||broswer.mozilla==true||broswer.chrome==true){
+		if(broswer.msie==true&&broswer.version<9){
+		   window.location.href = _path+"/xtgl/init_cxBrowser.html";
+		}
+	}else{
+		 window.location.href = _path+"/xtgl/init_cxBrowser.html";
+	}
+</script>
+	
+
+</head>
+<body class="body-container">
+	<!-- 放置页面显示内容 -->
+	
+<!-- requestMap中的参数为系统级别控制参数，请勿删除 -->
+<form id="requestMap" style="display:none;">
+	<input type="hidden" id="sessionUserKey" value="1700502163" />
+	<input type="hidden" id="gnmkdmKey" value="index" />
+	<input type="hidden" id="login_type" value="" />
+</form>
+<!-- top -->
+<div class="navbar navbar-default navbar-static-top top1">
+	<div class="container">
+		<div class="navbar-header">
+			<a class="navbar-brand logo_2" href="#"><img src="http://10.50.17.187:80/zftal-ui-v5-1.0.2/assets/images/logo/logo_jw_w.png" style="margin-top:-3px" />
+			<span id="xtmc">教学综合信息服务平台</span>
+			</a>
+			<button type="button" id="exit_btn" style = "width:44px;height:34px;"  class="navbar-toggle collapsed" data-toggle="collapse" data-target=".bs-navbar-collapse-js" aria-expanded="false">
+			退出
+			</button>
+			<button type="button" id="js_btn" style = "width:44px;height:34px;"  class="navbar-toggle collapsed" data-toggle="collapse" data-target=".bs-navbar-collapse-js" aria-expanded="false">
+				<img  style="margin-top: 3.5px;margin-left: 2.5px;position:relative;top:-9px;position:relative;left:-10px;" src="http://10.50.17.187:80/zftal-ui-v5-1.0.2/assets/images/user_logo.jpg" width="42" height="32">
+			</button>
+			
+			
+			<!--  -->
+			<button type="button" id="cd_btn" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".bs-navbar-collapse" aria-expanded="false">
+				<span class="sr-only">功能菜单</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			
+			<!--  -->
+			
+		</div>
+		<!-- <ul class="nav navbar-nav navbar-right hidden-xs" style="display:block !important"> -->
+		<ul class="nav navbar-nav navbar-right  hidden-xs">
+
+				<li>
+					<form class="navbar-form ">
+			<!-- 			<input type="text" class="form-control" placeholder="搜索服务功能"> -->
+					  	
+					  	
+					  	 
+					</form>
+					</li>
+					
+			<li>
+				<a href="#" class="dropdown-toggle grxx" data-toggle="dropdown"><img src="http://10.50.17.187:80/zftal-ui-v5-1.0.2/assets/images/user_logo.jpg" width="28" height="28"></a>
+				<ul class="dropdown-menu" >
+					
+					
+					<li class="divider"></li>
+					<li><a href="javascript:void(0);" id="updatePassword"><i class="top_png mm"></i>修改密码</a></li>
+					
+					
+					
+					<li class="divider"></li>
+					<li><a href="javascript:void(0);" id="exit"><i class="top_png tc"></i>退出</a></li>
+				</ul>
+			</li>
+		</ul>
+		<form class="navbar-form navbar-right">
+			
+		  	
+		  	
+		  	
+		  		
+		  		
+		  		 <input type="hidden" name="language" value="zh_CN" id="localChange"/>
+		  		
+		</form>
+	</div>
+</div>
+<!-- top-end -->
+
+<!-- 角色 -->
+<div class="navbar_index" id = "myDiv" style = "display:none">
+	<div class="container"   >
+	 	<nav id = "jsNav" class="navbar-collapse bs-navbar-collapse-js collapse" role="navigation" aria-expanded="false">
+	 	<ul class="nav navbar-nav">
+			 
+                <li class = "dropdown">
+                	
+                	<!-- <a id="drop_N03" href="#" role="button" class="dropdown-toggle" data-toggle="dropdown">
+                	自定义功能管理<b class="caret"></b> </a> -->
+                		<a tabindex="-1" href="#" role="button" class="dropdown-toggle" data-toggle="dropdown">
+		                	学生
+		                	<span class="glyphicon glyphicon-ok float_r"></span>
+                		</a>
+                	
+                	
+                </li>
+            
+		</ul>
+	  	</nav>
+	</div>
+</div>
+
+<!-- 菜单  -->
+<div class="navbar_index">
+	<div class="container" id = "myDiv1">
+	 	<nav id = "cdNav" class="navbar-collapse bs-navbar-collapse collapse" role="navigation" aria-expanded="false">
+     	  	<ul class="nav navbar-nav"><li class="dropdown"><a id="drop1" href="#" role="button" class="dropdown-toggle" data-toggle="dropdown">报名申请<b class="caret"></b> </a><ul class="dropdown-menu" role="menu" aria-labelledby="drop1"> <li><a tabindex="-1" onclick="clickMenu('N1053','/fxgl/fxbm_cxXsfxbmIndex.html','辅修报名','null'); return false;"  href="javascript:void(0);" target="_blank">辅修报名</a></li> <li><a tabindex="-1" onclick="clickMenu('N1056','/cxbm/cxbm_cxXscxbmIndex.html','重修报名','null'); return false;"  href="javascript:void(0);" target="_blank">重修报名</a></li> <li><a tabindex="-1" onclick="clickMenu('N2510','/kjgl/kjbm_cxXskjbm.html','考级项目报名','null'); return false;"  href="javascript:void(0);" target="_blank">考级项目报名</a></li> <li><a tabindex="-1" onclick="clickMenu('N2511','/jxrwbmgl/jxrwxmbm_cxJxrwxmbmIndex.html','教学项目报名','null'); return false;"  href="javascript:void(0);" target="_blank">教学项目报名</a></li> <li><a tabindex="-1" onclick="clickMenu('N306010','/cjxfrdgl/cjxfrdsq_cxCjxfrdsq.html','学生成绩学分认定申请','null'); return false;"  href="javascript:void(0);" target="_blank">学生成绩学分认定申请</a></li> <li><a tabindex="-1" onclick="clickMenu('N352753','/byqkgl/byqkbm_cxByqkbmIndex.html','毕业清考报名','null'); return false;"  href="javascript:void(0);" target="_blank">毕业清考报名</a></li> <li><a tabindex="-1" onclick="clickMenu('N4755','/xmfzgl/xmfzbm_cxXmfzbmIndex.html','创新创业报名','null'); return false;"  href="javascript:void(0);" target="_blank">创新创业报名</a></li> <li><a tabindex="-1" onclick="clickMenu('N580520','/xsjyhzgl/jyhzbm_cxJyhzbmIndex.html','结业换证报名','null'); return false;"  href="javascript:void(0);" target="_blank">结业换证报名</a></li> <li><a tabindex="-1" onclick="clickMenu('N783020','/xszgzsgl/xszgzssq_cxXszssqIndex.html','学生资格证书申请','null'); return false;"  href="javascript:void(0);" target="_blank">学生资格证书申请</a></li> <li><a tabindex="-1" onclick="clickMenu('N151530','/kcthgl/xskcthsq_cxXskcthIndex.html?sqlx=xnkc','校内课程替代申请','null'); return false;"  href="javascript:void(0);" target="_blank">校内课程替代申请</a></li> <li><a tabindex="-1" onclick="clickMenu('N151535','/kcthgl/xskcthsq_cxXskcthIndex.html?sqlx=xnkcxfjd','校内课程学分节点替代申请','null'); return false;"  href="javascript:void(0);" target="_blank">校内课程学分节点替代申请</a></li> <li><a tabindex="-1" onclick="clickMenu('N151540','/kcthgl/xskcthsq_cxXskcthIndex.html?sqlx=xnxfjd','校内学分节点替代申请','null'); return false;"  href="javascript:void(0);" target="_blank">校内学分节点替代申请</a></li> <li><a tabindex="-1" onclick="clickMenu('N151550','/kcthgl/xskcthsq_cxXskcthIndex.html?sqlx=xwkcxfjd','校外课程学分节点替代申请','null'); return false;"  href="javascript:void(0);" target="_blank">校外课程学分节点替代申请</a></li> <li><a tabindex="-1" onclick="clickMenu('N306512','/cjjfgl/cjjfsq_cxCjjfsqIndex.html','成绩加分申请','null'); return false;"  href="javascript:void(0);" target="_blank">成绩加分申请</a></li> <li><a tabindex="-1" onclick="clickMenu('N704515','/xskfxsy/syxmsq_cxSyxmsqIndex.html','开放性实验项目申请','null'); return false;"  href="javascript:void(0);" target="_blank">开放性实验项目申请</a></li> <li><a tabindex="-1" onclick="clickMenu('N303010','/cjfcgl/cjfcsq_cxCjfcsqIndex.html','成绩复查申请','null'); return false;"  href="javascript:void(0);" target="_blank">成绩复查申请</a></li> <li><a tabindex="-1" onclick="clickMenu('N4794','/cxxftd/cxxftdsq_cxCxxftdsqIndex.html','创新学分替代申请 ','null'); return false;"  href="javascript:void(0);" target="_blank">创新学分替代申请 </a></li></ul></li><li class="dropdown"><a id="drop1" href="#" role="button" class="dropdown-toggle" data-toggle="dropdown">信息维护<b class="caret"></b> </a><ul class="dropdown-menu" role="menu" aria-labelledby="drop1"> <li><a tabindex="-1" onclick="clickMenu('N100808','/xsxxxggl/xsgrxxwh_cxXsGrxxxgIndex.html','学生个人信息维护','null'); return false;"  href="javascript:void(0);" target="_blank">学生个人信息维护</a></li> <li><a tabindex="-1" onclick="clickMenu('N1532','/xspyfagl/xspyfaxxwh_cxXsPyfaxxwhIndex.html','个人培养方案','null'); return false;"  href="javascript:void(0);" target="_blank">个人培养方案</a></li> <li><a tabindex="-1" onclick="clickMenu('N4770','/xmfzgl/xmfzqr_cxXmfzqrIndex.html','创新创业学分确认','null'); return false;"  href="javascript:void(0);" target="_blank">创新创业学分确认</a></li> <li><a tabindex="-1" onclick="clickMenu('N542550','/xssxgl/sxgczl_cxSxgczlIndex.html','实习过程资料','null'); return false;"  href="javascript:void(0);" target="_blank">实习过程资料</a></li></ul></li><li class="dropdown"><a id="drop1" href="#" role="button" class="dropdown-toggle" data-toggle="dropdown">选课<b class="caret"></b> </a><ul class="dropdown-menu" role="menu" aria-labelledby="drop1"> <li><a tabindex="-1" onclick="clickMenu('N253508','/kbcx/xskbcx_cxXskbcxIndex.html','学生课表查询','null'); return false;"  href="javascript:void(0);" target="_blank">学生课表查询</a></li> <li><a tabindex="-1" onclick="clickMenu('N253525','/kcyx/kcyx_cxYxkcIndex.html','课程预选','null'); return false;"  href="javascript:void(0);" target="_blank">课程预选</a></li> <li><a tabindex="-1" onclick="clickMenu('N253512','/xsxk/zzxkyzb_cxZzxkYzbIndex.html','自主选课','null'); return false;"  href="javascript:void(0);" target="_blank">自主选课</a></li> <li><a tabindex="-1" onclick="clickMenu('N253513','/xsxk/tjxkyzb_cxSxResultTjxkYzb.html','筛除结果查询','null'); return false;"  href="javascript:void(0);" target="_blank">筛除结果查询</a></li> <li><a tabindex="-1" onclick="clickMenu('N253520','/xsxk/tjxkyzb_cxXkResultTjxkYzb.html','教材预定','null'); return false;"  href="javascript:void(0);" target="_blank">教材预定</a></li></ul></li><li class="dropdown"><a id="drop1" href="#" role="button" class="dropdown-toggle" data-toggle="dropdown">信息查询<b class="caret"></b> </a><ul class="dropdown-menu" role="menu" aria-labelledby="drop1"> <li><a tabindex="-1" onclick="clickMenu('N100801','/xsxxxggl/xsgrxxwh_cxXsgrxx.html','查询个人信息','null'); return false;"  href="javascript:void(0);" target="_blank">查询个人信息</a></li> <li><a tabindex="-1" onclick="clickMenu('N105505','/xjyj/xjyj_cxXjyjIndex.html','学籍预警查询','null'); return false;"  href="javascript:void(0);" target="_blank">学籍预警查询</a></li> <li><a tabindex="-1" onclick="clickMenu('N105508','/bygl/bysh_cxByshjgHcIndex.html','毕业审核结果核查','null'); return false;"  href="javascript:void(0);" target="_blank">毕业审核结果核查</a></li> <li><a tabindex="-1" onclick="clickMenu('N214505','/kbdy/bjkbdy_cxBjkbdyIndex.html','推荐课表打印','null'); return false;"  href="javascript:void(0);" target="_blank">推荐课表打印</a></li> <li><a tabindex="-1" onclick="clickMenu('N2151','/kbcx/xskbcx_cxXskbcxIndex.html','学生课表查询','null'); return false;"  href="javascript:void(0);" target="_blank">学生课表查询</a></li> <li><a tabindex="-1" onclick="clickMenu('N2155','/cdjy/cdjy_cxKxcdlb.html','查询空闲教室','null'); return false;"  href="javascript:void(0);" target="_blank">查询空闲教室</a></li> <li><a tabindex="-1" onclick="clickMenu('N255010','/xkcx/xkmdcx_cxXkmdcxIndex.html','选课名单查询','null'); return false;"  href="javascript:void(0);" target="_blank">选课名单查询</a></li> <li><a tabindex="-1" onclick="clickMenu('N255720','/cxkccx/cxkccx_cxCxkccxIndex.html','重修课程查询','null'); return false;"  href="javascript:void(0);" target="_blank">重修课程查询</a></li> <li><a tabindex="-1" onclick="clickMenu('N305005','/cjcx/cjcx_cxDgXscj.html','学生成绩查询','null'); return false;"  href="javascript:void(0);" target="_blank">学生成绩查询</a></li> <li><a tabindex="-1" onclick="clickMenu('N305007','/cjcx/cjcx_cxDgXsxmcj.html','学生成绩明细查询','null'); return false;"  href="javascript:void(0);" target="_blank">学生成绩明细查询</a></li> <li><a tabindex="-1" onclick="clickMenu('N358105','/kwgl/kscx_cxXsksxxIndex.html','考试信息查询','null'); return false;"  href="javascript:void(0);" target="_blank">考试信息查询</a></li> <li><a tabindex="-1" onclick="clickMenu('N4780','/xmfzgl/xshdfzcx_cxXshdfzcxIndex.html','创新创业获得学分','null'); return false;"  href="javascript:void(0);" target="_blank">创新创业获得学分</a></li> <li><a tabindex="-1" onclick="clickMenu('N581035','/jyhzgl/ksxxcx_cxXsksxxIndex.html','结业换证考试查询','null'); return false;"  href="javascript:void(0);" target="_blank">结业换证考试查询</a></li> <li><a tabindex="-1" onclick="clickMenu('N105515','/xsxy/xsxyqk_cxXsxyqkIndex.html','学生学业情况查询','null'); return false;"  href="javascript:void(0);" target="_blank">学生学业情况查询</a></li> <li><a tabindex="-1" onclick="clickMenu('N703510','/xssygl/sykbcx_cxSykbcxIndex.html','实验课表查询','null'); return false;"  href="javascript:void(0);" target="_blank">实验课表查询</a></li> <li><a tabindex="-1" onclick="clickMenu('N703515','/xssygl/sycjcx_cxSycjcxIndex.html','实验成绩查询','null'); return false;"  href="javascript:void(0);" target="_blank">实验成绩查询</a></li> <li><a tabindex="-1" onclick="clickMenu('N558020','/bysxxcx/xscjzbdy_cxXscjzbdyIndex.html','学生成绩总表打印','null'); return false;"  href="javascript:void(0);" target="_blank">学生成绩总表打印</a></li> <li><a tabindex="-1" onclick="clickMenu('N544030','/xssxgl/sxcjcx_cxSxcjcxIndex.html','实习成绩查询 ','null'); return false;"  href="javascript:void(0);" target="_blank">实习成绩查询 </a></li></ul></li><li class="dropdown"><a id="drop1" href="#" role="button" class="dropdown-toggle" data-toggle="dropdown">教学评价<b class="caret"></b> </a><ul class="dropdown-menu" role="menu" aria-labelledby="drop1"> <li><a tabindex="-1" onclick="clickMenu('N401605','/xspjgl/xspj_cxXspjIndex.html?doType=details','学生评价','null'); return false;"  href="javascript:void(0);" target="_blank">学生评价</a></li> <li><a tabindex="-1" onclick="clickMenu('N408130','/zjjspxgl/xszjjspx_cxXspxIndex.html','最佳教师评选','null'); return false;"  href="javascript:void(0);" target="_blank">最佳教师评选</a></li> <li><a tabindex="-1" onclick="clickMenu('N403050','/kcwjdcgl/kcwjdc_cxKcwjdcglIndex.html?doType=details','课程问卷调查','null'); return false;"  href="javascript:void(0);" target="_blank">课程问卷调查</a></li> <li><a tabindex="-1" onclick="clickMenu('N410510','/jxxxygl/jxxxfk_cxJxxxfkIndex.html','教学信息反馈','null'); return false;"  href="javascript:void(0);" target="_blank">教学信息反馈</a></li></ul></li><li class="dropdown"><a id="drop1" href="#" role="button" class="dropdown-toggle" data-toggle="dropdown">毕业设计(论文)<b class="caret"></b> </a><ul class="dropdown-menu" role="menu" aria-labelledby="drop1"> <li><a tabindex="-1" onclick="clickMenu('N532530','/xsbysjgl/xsxt_cxXsxtIndex.html','学生选题','null'); return false;"  href="javascript:void(0);" target="_blank">学生选题</a></li> <li><a tabindex="-1" onclick="clickMenu('N532510','/xsbysjgl/xstmsb_cxXstmsbIndex.html','学生课题申报','null'); return false;"  href="javascript:void(0);" target="_blank">学生课题申报</a></li> <li><a tabindex="-1" onclick="clickMenu('N532520','/xsbysjgl/tmxgsq_cxTmxgsqIndex.html','题目修改申请','null'); return false;"  href="javascript:void(0);" target="_blank">题目修改申请</a></li> <li><a tabindex="-1" onclick="clickMenu('N532525','/xsbysjgl/ktxgsq_cxKtxgsqIndex.html','课题修改申请','null'); return false;"  href="javascript:void(0);" target="_blank">课题修改申请</a></li> <li><a tabindex="-1" onclick="clickMenu('N532540','/xsbysjgl/xsgczl_cxXsgczlIndex.html','学生过程资料','null'); return false;"  href="javascript:void(0);" target="_blank">学生过程资料</a></li> <li><a tabindex="-1" onclick="clickMenu('N532550','/xsbysjgl/dbxxck_cxDbxxckIndex.html','答辩信息查看','null'); return false;"  href="javascript:void(0);" target="_blank">答辩信息查看</a></li> <li><a tabindex="-1" onclick="clickMenu('N532560','/xsbysjgl/cjck_cxCjckIndex.html','成绩查看','null'); return false;"  href="javascript:void(0);" target="_blank">成绩查看</a></li></ul></li></ul>	
+	  	</nav>
+	</div>
+</div>
+
+<!-- 主体 -->
+<div class="container padding-150">
+	<div class="row">
+		<div class="col-md-3 col-sm-4">
+			
+			
+			<div class="index_wdyy">
+				<h3><span>我的应用</span><a href="#" class="sz" id="wdyy_szbtn"></a></h3>
+				<ul class="list-unstyled"  id="index_wdyy" style="height: 350px;">
+					
+				</ul>
+				
+			</div>
+			
+		</div>
+		<div class="col-md-9 col-sm-8">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="index_grxx">
+						<div class="row">
+							<div class="col-md-5" id="yhxxIndex">
+														
+							</div>
+							<div class="col-md-7" id="newsnotice"  style="height: 150px;">
+								<!-- 新闻通知区域 -->
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="index_rctx" id="area_one"></div>
+				</div>
+				<div class="col-md-6">
+					
+					
+						<div class="index_rctx" id="area_two"></div>
+					 
+				</div>
+				<div class="col-md-6">
+					<div class="index_rctx" id="area_three"></div>
+				</div>
+				<div class="col-md-6">
+					<div class="index_rctx" id="area_four"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- footer --> 
+
+
+<!-- footer --> 
+<div id="footerID" class="footer">
+	<p>版权所有&copy; Copyright 1999-2017  正方软件股份有限公司　　中国·杭州西湖区紫霞街176号 互联网创新创业园2号301</p>
+</div>
+<!-- footer-end -->
+<!-- footer-end -->
+
+</body>
+
+
+		<style type="text/css">
+			.icon-div {
+				background-color: #48abea;
+				color: #fff;
+				font-size: 20px;
+				font-weight: 600;
+				text-align: center;
+				width: 48px;
+				height: 48px;
+				line-height: 48px;
+				border-radius: 100%;
+				margin: auto;
+			}
+			.index_wdyy ul li h5{
+				height: 60px;
+				overflow: hidden;
+			}
+			
+			.list-unstyled a{
+				text-decoration: none;
+			}
+			.index_rctx{
+				height:280px;
+			}
+			.index_rctx .table-responsive{   
+				height: 240px;
+    			overflow-y: hidden; 
+    		}
+		</style>
+
+
+<script type="text/javascript">
+ 	$(function() {
+				$(document).off('click', '#js_btn').on('click', '#js_btn', function(e) {
+				     $("#myDiv").css("display","");
+				});
+				localStorage.setItem('language',$("#localChange").val());//把值放入localStorage
+				if($("#localChange").val()=='en_US'){//切换系统名称为英文的
+					$("#xtmc").text("Teaching integrated information service platform");
+					$("title").text("Teaching integrated information service platform")
+					$("a.zh").hide();
+					$("a.en").show();
+				}else{
+					$("a.zh").show();
+					$("a.en").hide();
+				}
+			});
+ 	/* $(function($){
+	var broswer = function() {
+	    var _broswer = {};
+	    var sUserAgent = navigator.userAgent;
+	    //console.info("useragent: ", sUserAgent);
+	    var isOpera = sUserAgent.indexOf("Opera") > -1;
+	    if (isOpera) {
+	        //首先检测Opera是否进行了伪装
+	        if (navigator.appName == 'Opera') {
+	            //如果没有进行伪装，则直接后去版本号
+	            _broswer.version = parseFloat(navigator.appVersion);
+	        } else {
+	            var reOperaVersion = new RegExp("Opera (\\d+.\\d+)");
+	            //使用正则表达式的test方法测试并将版本号保存在RegExp.$1中
+	            reOperaVersion.test(sUserAgent);
+	            _broswer.version = parseFloat(RegExp['$1']);
+	        }
+	        _broswer.opera = true;
+	    }
+	    var isChrome = sUserAgent.indexOf("Chrome") > -1;
+	    if (isChrome) {
+	        var reChorme = new RegExp("Chrome/(\\d+\\.\\d+(?:\\.\\d+\\.\\d+))?");
+	        reChorme.test(sUserAgent);
+	        _broswer.version = parseFloat(RegExp['$1']);
+	        _broswer.chrome = true;
+	    }
+	    //排除Chrome信息，因为在Chrome的user-agent字符串中会出现Konqueror/Safari的关键字
+	    var isKHTML = (sUserAgent.indexOf("KHTML") > -1
+	            || sUserAgent.indexOf("Konqueror") > -1 || sUserAgent
+	            .indexOf("AppleWebKit") > -1)
+	            && !isChrome;
+	    if (isKHTML) {//判断是否基于KHTML，如果时的话在继续判断属于何种KHTML浏览器
+	        var isSafari = sUserAgent.indexOf("AppleWebKit") > -1;
+	        var isKonq = sUserAgent.indexOf("Konqueror") > -1;
+	        if (isSafari) {
+	            var reAppleWebKit = new RegExp("Version/(\\d+(?:\\.\\d*)?)");
+	            reAppleWebKit.test(sUserAgent);
+	            var fAppleWebKitVersion = parseFloat(RegExp["$1"]);
+	            _broswer.version = parseFloat(RegExp['$1']);
+	            _broswer.safari = true;
+	        } else if (isKonq) {
+	            var reKong = new RegExp(
+	                    "Konqueror/(\\d+(?:\\.\\d+(?\\.\\d)?)?)");
+	            reKong.test(sUserAgent);
+	            _broswer.version = parseFloat(RegExp['$1']);
+	            _broswer.konqueror = true;
+	        }
+	    }
+	    // !isOpera 避免是由Opera伪装成的IE  
+	    var isIE = sUserAgent.indexOf("Trident") > -1 && !isOpera;
+	    if (isIE) {
+	        var reIE = new RegExp("MSIE (\\d+\\.\\d+);");
+	        reIE.test(sUserAgent);
+	        _broswer.version = parseFloat(RegExp['$1']);
+	        _broswer.msie = true;
+	    }
+	    // 排除Chrome 及 Konqueror/Safari 的伪装
+	    var isMoz = sUserAgent.indexOf("Gecko") > -1 && !isChrome && !isKHTML;
+	    if (isMoz) {
+	        var reMoz = new RegExp("rv:(\\d+\\.\\d+(?:\\.\\d+)?)");
+	        reMoz.test(sUserAgent);
+	        _broswer.version = parseFloat(RegExp['$1']);
+	        _broswer.mozilla = true;
+	    }
+	    return _broswer;
+	}
+ 		var broswer = broswer();
+ 		if(broswer.msie==true||broswer.safari==true||broswer.mozilla==true||broswer.chrome==true){
+ 			if(broswer.msie==true&&broswer.version<9){
+ 			   window.location.href = _path+"/xtgl/init_cxBrowser.html";
+ 			}
+ 		}else{
+ 			 window.location.href = _path+"/xtgl/init_cxBrowser.html";
+ 		}
+ 	}) */
+</script>
+<script type="text/javascript" src="/js/globalweb/comp/xtgl/index_v5.js?ver=20180813"></script>
+<script type="text/javascript" src="/js/globalweb/comp/xtgl/jwglxt_index.js?ver=20180813"></script>
+<!--jQuery浏览器检测 -->
+<!--jQuery.validation -->
+<link rel="stylesheet" type="text/css" href="http://10.50.17.187:80/zftal-ui-v5-1.0.2/assets/plugins/validation/css/jquery.validate-min.css?ver=20180813" />
+<script type="text/javascript" src="http://10.50.17.187:80/zftal-ui-v5-1.0.2/assets/plugins/validation/js/jquery.validate-min.js?ver=20180813" charset="utf-8"></script>
+<script type="text/javascript" src="http://10.50.17.187:80/zftal-ui-v5-1.0.2/assets/plugins/validation/js/jquery.validate.contact-min.js?ver=20180813" charset="utf-8"></script>
+<script type="text/javascript" src="http://10.50.17.187:80/zftal-ui-v5-1.0.2/assets/plugins/validation/js/jquery.validate.methods.contact-min.js?ver=20180813" charset="utf-8"></script>
+<script type="text/javascript" src="http://10.50.17.187:80/zftal-ui-v5-1.0.2/assets/plugins/validation/lang/zh_CN-min.js?ver=20180813" charset="utf-8"></script>
+<script type="text/javascript">
+	jQuery(function($){
+		$('[data-toggle*="validation"]').trigger("validation");
+	});
+</script>
+
+
+</html>
