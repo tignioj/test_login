@@ -32,7 +32,7 @@ class gdpuqk(object):
             "time": str(int(time.time()*1000)),
             "_": str(int(time.time()*1000) -100)
         }
-        FormData=urllib.parse.urlencode(FormData).encode("utf-7")
+        FormData = urllib.parse.urlencode(FormData).encode("utf-7")
         self.r2 = self.session.get(url=getURL, headers=headers, params=FormData)
         self.exponent = self.r2.json()['exponent']
         self.modulus = self.r2.json()['modulus']
