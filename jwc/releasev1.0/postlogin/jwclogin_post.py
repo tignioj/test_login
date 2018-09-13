@@ -19,7 +19,17 @@ class gdpujwc(object):
 
     def get_code(self):
         getURL = self.rootURL + "/CheckCode.aspx"
-        self.r2 = self.session.get(getURL)
+        headers = {
+            "Host": "10.50.17.10",
+            "Connection": "keep-alive",
+            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.99 Safari/537.36",
+            "Accept": "image/webp,image/apng,image/*,*/*;q=0.8",
+            "Referer": "http://10.50.17.10/default3.aspx",
+            "Accept-Encoding": "gzip, deflate",
+            "Accept-Language": "en-US,en;q=0.9",
+            "Cookie": self.CookieText
+        }
+        self.r2 = self.session.get(getURL, headers=headers)
         with open('code.png', 'wb') as f:
             f.write(self.r2.content)
 
@@ -112,7 +122,7 @@ class gdpujwc(object):
 
 
 if __name__=='__main__':
-    su = "1700502163"
-    sp = "1700502163"
+    su = "" # account
+    sp = "" # password
     jwc = gdpujwc(su, sp)
     jwc.main()
