@@ -11,7 +11,7 @@ import requests
 import random
 
 
-#分析前端，抓包构造随机题目
+#Analyze front-end then struct the submitdata
 def return_random_data():
     s1_s5 = "1$"+str(random.randint(1,2))+"}2$"+str(random.randint(1,13))+"}3$"+str(random.randint(1,2))+"}4$"+str(random.randint(1,3))+"|"+str(random.randint(4,6))+"|"+str(random.randint(6,8))+"}5$"+str(random.randint(1,3))+"|"+str(random.randint(4,6))+"|"+str(random.randint(7,8))+"}"  #1-5
     s6_s8_a = "6$1}7$"+str(random.randint(1,3))+"}"
