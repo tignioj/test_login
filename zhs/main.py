@@ -3,7 +3,6 @@ import time
 import re
 from selenium import webdriver
 import os
-
     
 
 driver = webdriver.Chrome() 
@@ -16,7 +15,6 @@ class autoChoose(object):
         self.password = password
         self.cource = cource
         self.checked = 0
-
 
 
     def wxlogin(self):
@@ -33,6 +31,18 @@ class autoChoose(object):
                 print("open saveAnswer! %d" % (self.sjnum))
                 self.saveAnswer(msg)
 
+    def blurTrans(self, s1, s2):
+        if(s1 == "正确" or s1 == "对"):
+            s1 = "YES"
+        if(s1 == "错误" or s1 == "错"):
+            s1 = "NO"
+        if(s2 == "正确" or s2 == "对"):
+            s2 = "YES"
+        if(s2 == "错误" or s2 == "错"):
+            s2 = "NO"
+        return [s1, s2]
+
+
     def saveAnswer(self,msg):
         title = driver.execute_script("return document.querySelectorAll('.infoList > ul > li> span')[0].innerText")
         chapter = driver.execute_script("return document.querySelectorAll('.infoList > ul > li> span')[1].innerText")
@@ -40,7 +50,7 @@ class autoChoose(object):
         mystr = msg.raw['Content']
         try:
             pat = re.compile(r'\[(.*?)\n参考答案：(.*?)]]')
-            q = pat.search(mystr)
+            q = pat.search(mystr) 
             if q is None:
                 pat = re.compile(r'\n参考答案：(.*?)]]')
                 q = pat.search(mystr)
@@ -66,9 +76,8 @@ class autoChoose(object):
         if(len(l) == 0):
             print("resend", self.rq)
             self.xc.send_msg(self.rq)
-            
 
-        print(">>>Reply:",self.rq, l)
+        print(">>>>>>>>>Reply:",self.rq, l)
         if(not os.path.exists(title)):
             os.makedirs(title)
         print("***********GET SJNUM %d **********" % (self.sjnum))
@@ -93,29 +102,38 @@ class autoChoose(object):
             print("Empty answer!", self.l)
             return
         print("Choosing...:")
-
         self.sjtc = driver.execute_script("return $('.subject_node')[%d].getElementsByClassName('nodeLab')" % (self.sjnum))
         self.checked = 0
+        print("Trying...")
         try:
-            for j in self.l:
+            j = 0
+            while(j< len(self.l)):
                 i = 0
                 while(i < len(self.sjtc)):
-                    #print(self.sjtc[i].text.split('\n').pop(1), j)
-                    if(self.sjtc[i].text.split('\n').pop(1) == j):
-                        self.sjtc[i].click()
-                        print("checked:",self.rq,j)
-                    i+=1
-                    if(i>=len(self.sjtc)):
-                        self.checked = 1
+                    m = self.sjtc[i].text.split('\n').pop(1)
+                    #print(m, self.l[j])
+                    arr = self.blurTrans(self.l[j], m)
+                    print("BLUR TRANS:", arr[0], arr[1])
+                    if(arr[0] == arr[1]):
+                        #self.sjtc[i].click()
+                        if(driver.execute_script("return $('.subject_node')[%d].getElementsByTagName('input')[%d].checked = true" % (self.sjnum, i))):
+                            print("checked:",self.rq,self.l[j])
+                            i+=1
+                        else:
+                            print("!!!!NOT EXECUTE,  RECHECKED!!!" )
+                    else:
+                        i+=1
+                j+=1
         except:
-            print("Somethin wrong in checked, refind now")
+            print("findAnswer:Somethin wrong in checked, refind now")
             self.findAnswer()
         finally:
-            if(self.checked == 0):
-                print("Refind Answer!")
-                self.xc.send_msg(self.rq)
-            else:
+            if(i>=len(self.sjtc)):
+                self.checked = 1
                 print("ok", self.rq)
+            else:
+                print("!!!!!!!!!!!!!!!Refind Answer!!!!!!!!!!!!!!!!!!!")
+                self.xc.send_msg(self.rq)
 
 
     #Clear all answer
@@ -146,9 +164,14 @@ class autoChoose(object):
         #driver.find_elements_by_class_name("j-popup-close")
         #1 is video page
         self.handlefun(1)
-        time.sleep(3)
-        driver.execute_script('document.getElementsByClassName("popbtn_yes")[0].click()')
-        driver.execute_script('document.getElementsByClassName("j-popup-close")[1].click()')
+        time.sleep(4)
+        try:
+            driver.execute_script('document.getElementsByClassName("popbtn_yes")[0].click()')
+            driver.execute_script('document.getElementsByClassName("j-popup-close")[1].click()')
+        except:
+            time.sleep(3)
+            driver.execute_script('document.getElementsByClassName("popbtn_yes")[0].click()')
+            driver.execute_script('document.getElementsByClassName("j-popup-close")[1].click()')
 
 
 
@@ -169,7 +192,7 @@ class autoChoose(object):
             #patsj = re.compile(r'\n(.*)$') 
             #sj_str = patsj.search(self.sj[i].text).group(1) #match subject
             sj_str = self.sj[i].text
-            print(sj_str)
+            print("从网页上找到题目:", sj_str)
             # 保持i一致以便于查找题目对应的选项
             #print("openCource: ", sj_str ,"number: ", i)
             #l, rq清空一次
@@ -182,19 +205,26 @@ class autoChoose(object):
             self.rq = sj_str
             self.checked = 0
             self.xc.send_msg(sj_str) # 收到答案后再执行findAnswer()
-            k = 0
+            
+            timelimit = 0
             while(self.checked!=1):
+                print("WAITING RESPONSE...%d" % (timelimit))
                 time.sleep(1)
-                k+=1
-                if(k >= 30):
-                    print("Timeout a checked!")
-                    print("Resent", sj_str)
-                    self.xc.send_msg(sj_str) # 收到答案后再执行findAnswer()
+                timelimit+=1
+                if(timelimit >= 30):
+                    print("RESPONSE TIMEOUT")
+                    break
 
-            i+=1
-            if(i >= len(self.sj)):
-                self.chooseFinish = 1
-                print("FINISH FLAG:", self.chooseFinish)
+
+            if(self.checked != 1):
+                print("!!!!!!!!!!!!Timeout a checked!!!!!!!!!!!!!!!!!!!")
+                print("Resent", sj_str)
+                self.xc.send_msg(sj_str) # 收到答案后再执行findAnswer()
+            else:
+                i+=1
+                if(i >= len(self.sj)):
+                    self.chooseFinish = 1
+                    print("FINISH FLAG:", self.chooseFinish)
 
 
     def saveTest(self):
@@ -208,28 +238,25 @@ class autoChoose(object):
         time.sleep(2)
         i = 0
         while(i < len(self.tp)):
-        #while(i<= 0):
+        #while(i<= 8):
             print("\n\n========================PAGE %d START========================\n\n" % (i))
             self.tp[i].click()
             time.sleep(3)
             self.openCource(i)
             time.sleep(5)
             k = 0
-            while(self.chooseFinish != 1):
-                time.sleep(1)
-                k+=1
-                if(k>40):
-                    print("Timeout page submit!")
-                    break
+            print("LoopCourse WAITING 3S...")
+            time.sleep(3)
             if(self.chooseFinish == 1):
-                self.saveTest()
-                #driver.close()
+                #self.saveTest()
+                driver.close()
                 print("===loopOpenCourse switch to 1====")
                 print("\n\n========================PAGE %d FINISH========================\n\n" % (i))
                 self.handlefun(1)
                 i+=1
             else:
                 print("PAGE NOT FINISH, RELOOP NOW")
+                time.sleep(5)
 
 
 
@@ -243,7 +270,7 @@ if __name__=='__main__':
     account = "13226304166"
     password = "z656477z"
     #cource = "openVideo('2027882','7954','0');" #书法
-    #cource = "openVideo('2022880','6532','1');"
-    cource = "openVideo('2027843','7926','0');"
+    cource = "openVideo('2022880','6532','1');"
+    #cource = "openVideo('2027843','7926','0');"
     dt = autoChoose(account, password, cource)
     dt.main()
