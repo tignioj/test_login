@@ -5,5 +5,5 @@
 ### 问卷星自动提交答卷
 ### 智慧树刷课
 ### 慧树自动提交章节测试
-# 有问题欢迎开issue，start，pull request
+# 有问题欢迎开issue，star，pull request
 # 以及联系我`859897994@qq.com`
