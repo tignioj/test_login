@@ -2,5 +2,16 @@
 用js智慧树自动刷课，python刷题，
 # 用法
 
-- ChromeVersionPassVideo.js里面的内容直接粘贴到谷歌浏览器控制台
-- main.py需要selenium模块.
+# 一，刷视频
+`ChromeVersionPassVideo.js`里面的内容直接粘贴到谷歌浏览器控制台
+- 1.打开视频，点击播放
+- 2.按键盘F12打开Chrome浏览器控制台
+- 3.找到console窗口，复制代码到窗口，粘贴回车
+#### 已实现的功能:
+- 自动下一集
+- 自动1.5倍速
+- 自动填写弹窗
+- 静音播放
+  
+# 二，刷章节测试
+`main.py`用于课后章节测试需要selenium，wxpy模块和webdriver.exe，且需要python3,答案来源于微信公众号,目前很好奇那些公众号的答案来源又是什么？如果有知道的还望请教一二
