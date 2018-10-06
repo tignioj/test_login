@@ -267,8 +267,8 @@ class autoChoose(object):
 
         
 if __name__=='__main__':
-    account = "13226304166"
-    password = "z656477z"
+    account = ""
+    password = ""
     #cource = "openVideo('2027882','7954','0');" #书法
     cource = "openVideo('2022880','6532','1');"
     #cource = "openVideo('2027843','7926','0');"
