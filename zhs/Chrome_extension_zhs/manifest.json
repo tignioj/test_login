@@ -1,0 +1,31 @@
+{
+    "name": "智慧树刷课",
+    "version": "1.0",
+    "description": "智慧树刷课，视频1.5倍速 + 自动下一集 + 静音播放 + 标清 + 解决弹窗，项目地址：https://github.com/tignioj/test_login/tree/master/zhs/",
+    "permissions": [
+        "tabs",
+        "activeTab",
+        "declarativeContent",
+        "storage"
+    ],
+    "background": {
+        "scripts": ["background.js"],
+        "persistent": true
+    },
+    "page_action": {
+        "default_popup": "popup.html",
+        "default_icon": {
+            "16": "images/zhs.png",
+            "32": "images/zhs.png",
+            "48": "images/zhs.png",
+            "128": "images/zhs.png"
+          }
+    },
+    "icons": {
+        "16": "images/zhs.png",
+        "32": "images/zhs.png",
+        "48": "images/zhs.png",
+        "128": "images/zhs.png"
+    },
+    "manifest_version": 2
+}

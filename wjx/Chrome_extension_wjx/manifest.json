@@ -1,0 +1,31 @@
+{
+    "name": "问卷星随机器",
+    "version": "1.0",
+    "description": "问卷星调查问卷随机选择所有的题目(填空题和其他高级题目除外),项目地址：https://github.com/tignioj/test_login/tree/master/wjx/",
+    "permissions": [
+        "tabs",
+        "activeTab",
+        "declarativeContent",
+        "storage"  
+    ],
+    "background": {
+        "scripts": ["background.js"],
+        "persistent": false
+    },
+    "page_action": {
+        "default_popup": "popup.html",
+        "default_icon": {
+            "16": "images/logowjx.png",
+            "32": "images/logowjx.png",
+            "48": "images/logowjx.png",
+            "128": "images/logowjx.png"
+          }
+    },
+    "icons": {
+        "16": "images/logowjx.png",
+        "32": "images/logowjx.png",
+        "48": "images/logowjx.png",
+        "128": "images/logowjx.png"
+    },
+    "manifest_version": 2
+}
