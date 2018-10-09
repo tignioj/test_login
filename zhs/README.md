@@ -28,6 +28,7 @@
 #### 1. 安装[python3](https://www.python.org/)
 #### 2. 官网下载[Chromewebdriver.exe](http://chromedriver.chromium.org/downloads)
 解压后把`chromedriver.exe`放在python3的安装目录
+![Chromewebdriver.png](./img/Chromewebdriver.png)
 
 #### 3. 安装必要的模块
 pip3 install selenium re wxpy
@@ -63,4 +64,4 @@ pip3 install selenium re wxpy
 
 
 # 如果对你有帮助，请给个star ^^支持一下
-# 有问题欢迎开issue
+# 有问题欢迎开issue（国际惯例，请先百度谷歌）
