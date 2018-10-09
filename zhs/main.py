@@ -3,6 +3,7 @@ import time
 import re
 from selenium import webdriver
 import os
+import sys
     
 
 driver = webdriver.Chrome() 
@@ -193,13 +194,13 @@ class autoChoose(object):
             #sj_str = patsj.search(self.sj[i].text).group(1) #match subject
             sj_str = self.sj[i].text
             print("从网页上找到题目:", sj_str)
-            # 保持i一致以便于查找题目对应的选项
             #print("openCource: ", sj_str ,"number: ", i)
             #l, rq清空一次
             self.l = []
             self.rq = ''
 
             self.sjnum = i
+            # 保持sjnum一致以便于查找题目对应的选项
             print("***********SET SJNUM %d **********" % (self.sjnum))
             time.sleep(1)
             self.rq = sj_str
@@ -238,7 +239,6 @@ class autoChoose(object):
         time.sleep(2)
         i = 0
         while(i < len(self.tp)):
-        #while(i<= 8):
             print("\n\n========================PAGE %d START========================\n\n" % (i))
             self.tp[i].click()
             time.sleep(3)
@@ -248,7 +248,6 @@ class autoChoose(object):
             print("LoopCourse WAITING 3S...")
             time.sleep(3)
             if(self.chooseFinish == 1):
-                #self.saveTest()
                 driver.close()
                 print("===loopOpenCourse switch to 1====")
                 print("\n\n========================PAGE %d FINISH========================\n\n" % (i))
@@ -267,10 +266,9 @@ class autoChoose(object):
 
         
 if __name__=='__main__':
-    account = ""
-    password = ""
+    account = sys.argv[1]
+    password = sys.argv[2]
     #cource = "openVideo('2027882','7954','0');" #书法
-    cource = "openVideo('2022880','6532','1');"
-    #cource = "openVideo('2027843','7926','0');"
+    cource = sys.argv[3]
     dt = autoChoose(account, password, cource)
     dt.main()
