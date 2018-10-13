@@ -30,25 +30,23 @@
         if (obj) {
             window.location.href = "https://www.wjx.cn/jq/" + obj[1] + ".aspx";
         } else {
-            console.log("not pat", obj);
+
         }
     })();
 
 
     var currentURL = window.location.href;
     //自动转为电脑网页版
-    (function redirect() {
-        try {
-            var pat = /(https:\/\/www\.wjx\.cn\/)(jq|m)(.*)/g;
-            var obj = pat.exec(currentURL);
-            if (obj[2] == "m") {
-                console.log("redirect now");
-                window.location.href = obj[1] + "jq" + obj[3];
-            } else {
-                console.log("do!");
-            }
-        } catch (error) {}
-    })();
+    function redirect() {
+        var pat = /(https:\/\/www\.wjx\.cn\/)(jq|m)(.*)/g;
+        var obj = pat.exec(currentURL);
+        if (obj[2] == "m") {
+
+            window.location.href = obj[1] + "jq" + obj[3];
+        } else {
+
+        }
+    };
 
 
     /**
@@ -150,7 +148,7 @@
                     randomChoose.querySelectorAll("input")[0].checked = true;
                     randomChoose.querySelectorAll("a")[0].classList.add("jqChecked");
                 }
-                console.log(times);
+
             }
         }
         this.martixStar = function(subject) {
@@ -159,7 +157,7 @@
                 var list = tr[i].querySelectorAll("li");
                 var rnnum = randint(0, list.length - 1);
                 list[rnnum].click();
-                console.log(i, rnnum);
+
             }
         }
 
@@ -228,7 +226,7 @@
 
 
     /**
-     * @name 智慧树题目类型判断，并随机选择
+     * @name 问卷星题目类型判断，并随机选择
      */
     function judgeType() {
         //q = $$(".div_question");
@@ -239,10 +237,10 @@
             if ((q[i].querySelectorAll(".ulradiocheck")[0]) && (q[i].querySelectorAll("input")[0])) { // 非表格单选或者多选
                 var input = q[i].querySelectorAll("input");
                 if (input[0].type == 'radio') {
-                    console.log("单选题", i);
+
                     rc.singleChoose(q[i]);
                 } else if (input[0].type == 'checkbox') {
-                    console.log("多选题", i);
+
                     rc.multiChoose(q[i]);
                 }
 
@@ -251,29 +249,29 @@
                 if (q[i].querySelectorAll("input")[0]) { // 表格题中包含有单选， 多选
                     input = q[i].querySelectorAll("input");
                     if (input[0].type == 'radio') {
-                        console.log("表格单选", i);
+
                         rc.martixSingleChoose(q[i]);
                     } else if (input[0].type == 'checkbox') {
-                        console.log("表格多选", i);
+
                         rc.martixMultiChoose(q[i]);
                     }
                 } else if (!q[i].querySelectorAll("input")[0] && q[i].querySelectorAll("li")[0]) { // 表格中的星星题目，没有Input标签
-                    console.log("Martix-Star", i);
+
                     rc.martixStar(q[i]);
                 }
             } else if (q[i].querySelectorAll("textarea")[0]) {
-                console.log("填空", i);
+                return;
             } else if (q[i].querySelectorAll(".slider")[0]) {
-                console.log("Slider-Single-line", i);
+
                 rc.singleSlider(q[i]);
             } else if (q[i].querySelectorAll(".notchoice")[0]) {
-                console.log("Star-Single-line", i);
+
                 rc.singleStar(q[i]);
             } else if (q[i].querySelectorAll(".lisort")[0]) {
-                console.log("li-Sort", i);
+
                 rc.randomSort(q[i]);
             } else if (q[i].querySelectorAll("select")[0]) {
-                console.log("Select", i);
+
                 rc.dropdownSelect(q[i]);
             }
         }
@@ -281,12 +279,7 @@
     judgeType();
 
     //滚动到提交按钮处
-    try {
-        var scrollvalue = document.getElementById("submit_button").offsetParent.offsetParent.offsetTop;
-        window.scrollTo({
-            top: scrollvalue,
-            behavior: "smooth"
-        });
-    } catch (error) {}
+
+
 
 })();
