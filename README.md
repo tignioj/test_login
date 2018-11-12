@@ -1,9 +1,8 @@
-# test_login
-# 此项目包括但将不限于
-### 教务处抢课
-### 教务处登陆
-### 问卷星自动提交答卷
-### 智慧树刷课
-### 慧树自动提交章节测试
+# 爬虫小项目
+### [问卷星自动提交答卷](https://github.com/tignioj/test_login/tree/master/wjx)
+### [智慧树刷课](https://github.com/tignioj/test_login/tree/master/zhs)
+### [正方系统教务处抢课](https://github.com/tignioj/test_login/tree/master/gdpuqk/releasev1.0)
+- 待完成
+### [教务处登陆查分](https://github.com/tignioj/test_login/tree/master/jwc)
+- 待完成
 # 有问题欢迎开issue，star，pull request
-# 以及联系我`859897994@qq.com`
