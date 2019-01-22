@@ -1,3 +1,19 @@
+/**
+ * 拿到加密的密码方式一：把网页上的5个加密文件整合成一个，直接调用即可, 此文件唯一需要改动的参数是OriginalPassword,拉到文件的最下面修改
+ * @OriginalPassword 你的教务处登陆密码
+ * 
+ * @modulus 变量需要作为加密的参数之一，由网页的sesstion生成，具体如何生成无法得知，
+ * 但是我们可以直接从网页上直接拿到，这里我们用python的login1.py配合可以拿到该变量
+ * @exponent 此参数无特殊需要无需改动，这个也是加密过程的其中一个变量，但是它似乎是固定的AQAB,同样由网页上的sesstion上可以获取到
+ * @enPassword 加密后的密码
+
+ */
+*
+/
+
+
+
+
 navigator = {
     appName: "Netscape"
 }
@@ -1047,27 +1063,26 @@ function b64toBA(s) {
 
 
 
-Originalpassword = "88888888.";
-//modulus = "AK5CIgbMnmo5FE4H9rr968LcIZCILhrr5TQvMqzZk7+6ocq0B4wyV4ZXzCNo0xYeoXlbKRhbch/+mXIPI8htuTXXqbDTqpjiRnfqmZNYBl4Sv+9y/PXgEpfu6qrAWnyBUJWJ1rP9WC/D+6dbfuEPVhrrS4vMmZjBQeIGL5bXgL21";
+// 1. 请在下面输入你的原始密码
+Originalpassword = "input your password here";
+
+/**
+ * @modulus 变量需要作为加密的参数之一，由网页的sesstion生成，具体如何生成无法得知，
+ * 但是我们可以直接从网页上直接拿到，这里我们用python的login1.py配合可以拿到该变量
+    比如 ：modulus = "AK5CIgbMnmo5FE4H9rr968LcIZCILhrr5TQvMqzZk7+6ocq0B4wyV4ZXzCNo0xYeoXlbKRhbch/+mXIPI8htuTXXqbDTqpjiRnfqmZNYBl4Sv+9y/PXgEpfu6qrAWnyBUJWJ1rP9WC/D+6dbfuEPVhrrS4vMmZjBQeIGL5bXgL21";
+ * @exponent 这个也是加密过程的其中一个变量，但是它似乎是固定的AQAB,同样由网页上的sesstion上可以获取到
+ */
 modulus = process.argv[2]
 exponent = "AQAB";
 
+/**
+ * 下面是加密过程，我们无需知道它具体是如何加密的
+ * 我们只需要知道它调用了上面的一堆函数（在网页上可以分析到）
+ * 经过一番加密后enPassword就是最终的加密结果了
+ */
 var rsaKey = new RSAKey();
 rsaKey.setPublic(b64tohex(modulus), b64tohex(exponent));
 var enPassword = hex2b64(rsaKey.encrypt(Originalpassword));
 console.log(enPassword);
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 //========================get module

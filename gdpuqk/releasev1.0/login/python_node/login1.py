@@ -5,6 +5,7 @@ import urllib
 import os
 class gdpuqk(object):
     def __init__(self):
+        # 用requests.session()可以保证请求都是同一个cookie
         self.session = requests.session() 
 
     def getcsrftoken_and_cookie(self):
@@ -38,6 +39,8 @@ class gdpuqk(object):
         self.modulus = self.r2.json()['modulus']
         print(self.exponent, self.modulus)
     
+    # 这是一个加密函数
+    # 调用系统的nodejs 传入网页上的session的modulus参数，最终拿到加密后的密码
     def getenmm(self):
         mycommand = 'node total.js ' + self.modulus
         self.mm = os.popen(mycommand).read()
@@ -64,6 +67,7 @@ class gdpuqk(object):
 
         data = {
             "csrftoken": self.csrftoken,
+            # yhm:输入你的教务处登陆密码
             "yhm": "1700502163",
             "mm": self.mm,
             "mm": self.mm
